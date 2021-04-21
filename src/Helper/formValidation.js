@@ -21,6 +21,7 @@ export default function formValidation(name, value, schema) {
       if (!isNumber.test(value)) error = "This field accepts numbers only."
       break
 
+      
     case "email":
       if (!isEmail.test(value)) error = "Please enter a valid email address."
       break
