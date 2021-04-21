@@ -8,7 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem"
 import Button from "@material-ui/core/Button"
 
 // Destructuring props
-const FirstStep = ({ handleNext, handleChange, values: { firstName, lastName, email, gender }, formErrors }) => {
+const FirstStep = ({ handleNext, handleChange, values: { firstName, date,lastName, email, gender }, formErrors }) => {
   // Check if all values are not empty or if there are some error
   const isValid =
     firstName.length > 0 &&
@@ -27,7 +27,7 @@ const FirstStep = ({ handleNext, handleChange, values: { firstName, lastName, em
             fullWidth
             label="First Name"
             name="firstName"
-            placeholder="Your first name"
+            variant="outlined"
             margin="normal"
             value={firstName || ""}
             onChange={handleChange}
@@ -41,7 +41,8 @@ const FirstStep = ({ handleNext, handleChange, values: { firstName, lastName, em
             fullWidth
             label="Last Name"
             name="lastName"
-            placeholder="Your last name"
+             variant="outlined"
+          
             margin="normal"
             value={lastName || ""}
             onChange={handleChange}
@@ -51,33 +52,72 @@ const FirstStep = ({ handleNext, handleChange, values: { firstName, lastName, em
           />
         </Grid>
 
-        <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
-            label="Email"
-            name="email"
-            placeholder="Your email address"
-            type="email"
-            value={email || ""}
-            onChange={handleChange}
+            label="Card Number"
+            name="lastName"
+             variant="outlined"
+         
             margin="normal"
-            error={!!formErrors.email}
-            helperText={formErrors.email}
+            value={lastName || ""}
+            onChange={handleChange}
+            error={!!formErrors.lastName}
+            helperText={formErrors.lastName}
             required
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl fullWidth required margin="normal">
-            <InputLabel>Gender</InputLabel>
-            <Select value={gender} onChange={handleChange} name="gender">
-              <MenuItem value={"Male"}>Male</MenuItem>
-              <MenuItem value={"Female"}>Female</MenuItem>
-            </Select>
-          </FormControl>
+
+
+          <Grid item xs={12} sm={6}>
+          <TextField
+            fullWidth
+            label="CSV"
+            name="lastName"
+             variant="outlined"
+            margin="normal"
+            value={lastName || ""}
+            onChange={handleChange}
+            error={!!formErrors.lastName}
+            helperText={formErrors.lastName}
+            required
+          />
         </Grid>
+
+         <Grid item xs={12} sm={6}>
+          <TextField
+            fullWidth
+            InputLabelProps={{
+              shrink: true
+            }}
+            label="Card Expiry Date"
+            name="date"
+           // type="date"
+            defaultValue= "2021-12"
+            onChange={handleChange}
+            margin="normal"
+            required
+          />
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <TextField
+            fullWidth
+            label="Card Name Holder"
+            name="lastName"
+             variant="outlined"
+            margin="normal"
+            value={lastName || ""}
+            onChange={handleChange}
+            error={!!formErrors.lastName}
+            helperText={formErrors.lastName}
+            required
+          />
+        </Grid>
+       
       </Grid>
       <div style={{ display: "flex", marginTop: 50, justifyContent: "flex-end" }}>
-        <Button variant="contained" disabled={!isValid} color="primary" onClick={isValid ? handleNext : null}>
+        <Button variant="contained"  color="primary" onClick={ handleNext }>
           Next
         </Button>
       </div>

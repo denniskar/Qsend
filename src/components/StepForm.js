@@ -9,9 +9,10 @@ import SecondStep from "./SecondStep"
 import Confirm from "./Confirm"
 import Success from "./Success"
 import formValidation from "../Helper/formValidation"
+import logo from "../assets/logo.png"
 
 // Step titles
-const labels = ["First Step", "Second Step", "Confirmation"]
+const labels = ["CARD REGISTRATION", "PAYMENT", "SCHEDULE PAYMENT"]
 
 const initialValues = {
   firstName: "",
@@ -114,11 +115,15 @@ const StepForm = () => {
       ) : (
         <>
           <Box style={{ margin: "30px 0 50px" }}>
-            <Typography variant="h4" align="center">
-              Multi Step Form
+            <Typography variant="h6" align="center">
+              CREDIT CARD INFO
             </Typography>
             <Typography variant="subtitle2" align="center" style={{ margin: "10px 0" }}>
-              React Material UI multi step form with basic form validation logic.
+              PAYMENT FORM
+              
+            </Typography>
+            <Typography variant="subtitle2" align="center" style={{ margin: "10px 0" }}>
+              <img src={logo} alt="Logo"  style={{ maxWidth:"200px"}} />
             </Typography>
           </Box>
           <Stepper activeStep={activeStep} style={{ margin: "30px 0 15px" }} alternativeLabel>

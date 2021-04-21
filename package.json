@@ -13,8 +13,13 @@
 	"main": "src/index.js",
 	"dependencies": {
 		"@material-ui/core": "4.11.0",
+		"@material-ui/icons": "^4.11.2",
+		"clsx": "^1.1.1",
+		"jsonwebtoken": "^8.5.1",
 		"react": "16.14.0",
+		"react-dates": "^21.8.0",
 		"react-dom": "16.14.0",
+		"react-router-dom": "^5.2.0",
 		"react-scripts": "3.4.3"
 	},
 	"scripts": {

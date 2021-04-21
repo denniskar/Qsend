@@ -1,74 +1,55 @@
-import React, { Fragment } from "react"
-import List from "@material-ui/core/List"
-import ListItem from "@material-ui/core/ListItem"
-import ListItemText from "@material-ui/core/ListItemText"
-import Divider from "@material-ui/core/Divider"
+import React from "react"
+import Grid from "@material-ui/core/Grid"
+import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
-
-// Destructure props
-const Confirm = ({ handleNext, handleBack, values }) => {
-  const { firstName, lastName, email, gender, date, phone, city } = values
-
-  const handleSubmit = () => {
-    // Do whatever with the values
-    console.log(values)
-    // Show last compinent or success message
-    handleNext()
-  }
+import FormControl from "@material-ui/core/FormControl"
+import Select from "@material-ui/core/Select"
+import InputLabel from "@material-ui/core/InputLabel"
+import MenuItem from "@material-ui/core/MenuItem"
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+// Destructuring props
+const Confirm = ({ handleNext, handleBack, handleChange, values: { city, date,gender, phone }, formErrors }) => {
+  // Check if all values are not empty or if there are some error
+  const isValid = city.length > 0 && !formErrors.city && date.length > 0 && phone.length > 0 && !formErrors.phone
 
   return (
-    <Fragment>
-      <List disablePadding>
-        <ListItem>
-          <ListItemText primary="First Name" secondary={firstName} />
-        </ListItem>
+    <>
+      <Grid container spacing={2}>
+        
+      <Grid item xs={12} sm={12}>
+          <TextField
+            fullWidth
+            InputLabelProps={{
+              shrink: true
+            }}
+            label="Start Date"
+            name="date"
+            type="date"
+          //  defaultValue={date || "2021-12-1"}
+            onChange={handleChange}
+            margin="normal"
+            required
+          />
+        </Grid>
+        <Grid item xs={12} sm={12}>
+       
+        <FormControlLabel control={<Checkbox value="checkedC" />} label="Make Payment at the beginning of every month" />        
+         </Grid>
 
-        <Divider />
+      
 
-        <ListItem>
-          <ListItemText primary="Last Name" secondary={lastName} />
-        </ListItem>
-
-        <Divider />
-
-        <ListItem>
-          <ListItemText primary="Email Address" secondary={email} />
-        </ListItem>
-
-        <Divider />
-
-        <ListItem>
-          <ListItemText primary="Gender" secondary={gender} />
-        </ListItem>
-
-        <Divider />
-
-        <ListItem>
-          <ListItemText primary="Date of birth" secondary={date} />
-        </ListItem>
-
-        <Divider />
-
-        <ListItem>
-          <ListItemText primary="City" secondary={city} />
-        </ListItem>
-
-        <Divider />
-
-        <ListItem>
-          <ListItemText primary="phone" secondary={phone.length > 0 ? phone : "Not Provided"} />
-        </ListItem>
-      </List>
-
+      </Grid>
       <div style={{ display: "flex", marginTop: 50, justifyContent: "flex-end" }}>
-        <Button variant="contained" color="default" onClick={handleBack}>
+        <Button variant="contained" color="default" onClick={handleBack} style={{ marginRight: 10 }}>
           Back
         </Button>
-        <Button style={{ marginLeft: 10 }} variant="contained" color="secondary" onClick={handleSubmit}>
-          Confirm & Continue
+        <Button variant="contained" color="primary" style={{ marginRight: 10 }}>
+          Submit 
         </Button>
+        
       </div>
-    </Fragment>
+    </>
   )
 }
 
