@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
@@ -12,6 +12,7 @@ import {Route,BrowserRouter as Router,Link} from "react-router-dom"
 import Typography from '@material-ui/core/Typography';
 import Box from "@material-ui/core/Box"
 import logo from "../../assets/clogo.jpg"
+import axios from "axios"
 const useStyles = makeStyles(theme => ({
     PaymentBar: {
       position: "relative",
@@ -47,9 +48,47 @@ const useStyles = makeStyles(theme => ({
 
 const Login = () => {
 
-   const handleSubmit=(values)=>{
-     console.log(values);
-   }
+const [userName,setUserName]=useState("");
+const [password,setPassWord]=useState("");
+const[loginStatus,setLoginStatus]=useState("false")
+
+  
+   
+const submit=()=>{
+
+  axios.post( "https://192.168.10.3:7000/api/qsend/v1/auth/token",{
+     username:userName,
+      password:password,
+  }).then ((response)=>{
+
+    if(!response.data.message){
+      setLoginStatus(false);
+    }else{
+        console.log(response.data);
+        localStorage.setItem("token",response.data.token)
+        setLoginStatus(true)
+    }
+
+  })
+
+}
+    
+const handleSubmit=()=>{
+  fetch("http://192.168.10.3:7000/api/qsend/v1/auth/token",{
+method:"POST",
+body:JSON.stringify({
+  username:userName,
+  password:password
+})
+  }.then((response)=>{
+    response.json().then((result)=>{
+         console.log(result)
+    })})
+  
+  
+  )
+}
+
   
     const classes = useStyles()
   return (
@@ -80,7 +119,7 @@ const Login = () => {
             label="UserName "
             name="city"
              variant="outlined"
-          
+          onChange={(e)=>{setUserName(e.target.value)}}
             
             margin="normal"
             
@@ -94,7 +133,7 @@ const Login = () => {
             name="city"
              variant="outlined"
               type="password"
-           
+              onChange={(e)=>{setPassWord(e.target.value)}}
             margin="normal"
             
             required
@@ -102,8 +141,9 @@ const Login = () => {
         </Grid>
       </Grid>
       <div style={{ display: "flex", marginTop: 50, justifyContent: "flex-end" }}>
-        <Button variant="contained"  color="primary" style={{ marginRight: 10,marginBottom:5 }} onSubmit={handleSubmit}>
-        <Link to ="/payment" style={{ textDecoration: 'none' }}>Login</Link>
+        <Button variant="contained"  color="primary" style={{ marginRight: 10,marginBottom:5 }} onClick={submit}>
+        {/* <Link to ="/payment" style={{ textDecoration: 'none' }}>Login</Link> */}
+        Login
         </Button>
         <Button  variant="contained" size="small" style={{ marginRight: 10,marginBottom:5 }}>
         <Link to ="/registration" style={{ textDecoration: 'none' }}>Register</Link>
